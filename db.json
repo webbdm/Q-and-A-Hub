@@ -1,0 +1,59 @@
+{
+  "answers": [
+    {
+      "id": "1",
+      "text": "This is an answer for question 1",
+      "created_at": "10:30am",
+      "created_by": "3",
+      "question_id": 1
+    },
+    {
+      "id": "2",
+      "text": "This is an answer for question 2",
+      "created_at": "11:30am",
+      "created_by": "3",
+      "question_id": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "text": "Question1",
+      "tags": [],
+      "created_at": "10am",
+      "created_by": 1,
+      "solution_id": 1
+    },
+    {
+      "id": 2,
+      "text": "Question2",
+      "tags": [],
+      "created_at": "11am",
+      "created_by": 2,
+      "solution_id": 2
+    }
+  ],
+  "profiles": [
+    {
+      "name": "John Smith",
+      "cohort": "Cohort 10",
+      "tags": ["tag1", "tag2"],
+      "bio": "This is my bio",
+      "user_id": "1"
+    },
+    {
+      "name": "Jane Smith",
+      "cohort": "Cohort 10",
+      "tags": ["tag1", "tag2"],
+      "bio": "This is my bio",
+      "user_id": "2"
+    },
+    {
+      "name": "Answerer",
+      "cohort": "Cohort 1",
+      "tags": ["tag1", "tag2"],
+      "bio": "This is my bio",
+      "user_id": "3"
+    }
+  ]
+}
