@@ -19,11 +19,11 @@ class App extends Component {
 					<Header />
 
 					<Switch>
-						<Route path="/question">
+						<Route exact path="/">
 							<Question />
 						</Route>
 
-						<Route path="/">
+						<Route path="/profile">
 							<Profile />
 						</Route>
 					</Switch>
