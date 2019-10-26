@@ -15,7 +15,7 @@ const Header = () => {
 
 				<Link
 					className="nav-link"
-					to="/"
+					to="/profile"
 				>
                     Profile
 				</Link>

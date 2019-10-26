@@ -8,6 +8,13 @@
       "question_id": 1
     },
     {
+      "id": "3",
+      "text": "This is an answer for question 1",
+      "created_at": "10:30am",
+      "created_by": "3",
+      "question_id": 1
+    },
+    {
       "id": "2",
       "text": "This is an answer for question 2",
       "created_at": "11:30am",
@@ -35,23 +42,34 @@
   ],
   "profiles": [
     {
+      "id": 1,
       "name": "John Smith",
       "cohort": "Cohort 10",
-      "tags": ["tag1", "tag2"],
+      "tags": [
+        "android"
+      ],
       "bio": "This is my bio",
       "user_id": "1"
     },
     {
+      "id": 2,
       "name": "Jane Smith",
       "cohort": "Cohort 10",
-      "tags": ["tag1", "tag2"],
+      "tags": [
+        "tag1",
+        "tag2"
+      ],
       "bio": "This is my bio",
       "user_id": "2"
     },
     {
+      "id": 3,
       "name": "Answerer",
       "cohort": "Cohort 1",
-      "tags": ["tag1", "tag2"],
+      "tags": [
+        "tag1",
+        "tag2"
+      ],
       "bio": "This is my bio",
       "user_id": "3"
     }
