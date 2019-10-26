@@ -10,9 +10,10 @@ const baseURL = 'http://localhost:4000';
 // }
 
 export const questionsApi = {
-    get: () =>  axios.get(`${baseURL}/questions`),
+    get: () => axios.get(`${baseURL}/questions`),
 };
 
 export const answersApi = {
-    get: options =>  axios.get(`${baseURL}/answers`, options),
+    get: options => axios.get(`${baseURL}/answers`, options),
+    post: answer => axios.post(`${baseURL}/answers`, answer)
 };

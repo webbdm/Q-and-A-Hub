@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 
 import { questionsApi, answersApi } from "../../providers/api";
 
@@ -6,16 +6,42 @@ import './Question.scss';
 
 const Answer = ({ text }) => <h1>{text}</h1>;
 
-const QuestionCard = ({ text, answers }) => <div className="question">
-	<div className="card">
-		<div className="card-header">
-			{text}
+const QuestionCard = ({ id, text, answers }) => {
+	const [newAnswer, setNewAnswer] = useState('Type your answer');
+
+	const handleKeyPress = (e) => {
+
+		setNewAnswer(e.target.value);
+
+		if (e.keyCode === 13 && e.shiftKey === false) {
+			//e.preventDefault();
+			answersApi.post({
+				"text": newAnswer,
+				"created_at": "11:30am",
+				"question_id": id,
+				"created_by": "3"
+			});
+		}
+
+	}
+	return (<div className="question">
+		<div className="card">
+			<div className="card-header">
+				{text}
+			</div>
+			<div className="card-body">
+				{answers && answers.map(answer => <Answer key={answer.id} text={answer.text} />)}
+			</div>
+			<div className="input-group">
+				<div className="input-group-prepend">
+					<span className="input-group-text">With textarea</span>
+				</div>
+				<textarea onKeyUp={(e) => handleKeyPress(e)} className="form-control" aria-label="With textarea"></textarea>
+			</div>
+
 		</div>
-		<div className="card-body">
-			{answers && answers.map(answer => <Answer key={answer.id} text={answer.text} />)}
-		</div>
-	</div>
-</div>
+	</div>)
+};
 
 class Question extends Component {
 	constructor() {
@@ -37,7 +63,7 @@ class Question extends Component {
 				return Promise.all([data, ...qIds]);
 
 			}).then(([questions, ...answers]) => {
-				const ans = answers.map(a => a.data[0]);
+				const ans = answers.map(a => a.data)[0];
 				const qs = this.state.questions;
 				this.setState({ questions: qs.map(q => ({ ...q, answers: ans.filter(a => a.question_id === q.id) })) });
 
@@ -50,7 +76,7 @@ class Question extends Component {
 	render() {
 		return (
 			<div className="question-wrapper">
-				{this.state.questions.map(question => <QuestionCard key={question.id} answers={question.answers} text={question.text} />)}
+				{this.state.questions.map(question => <QuestionCard key={question.id} id={question.id} answers={question.answers} text={question.text} />)}
 			</div>
 		);
 	}
