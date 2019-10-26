@@ -1,24 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Align from './layout/Align';
+import { Link } from "react-router-dom";
 
-
-const mapStateToProps = ({ appReducer }) => {
-    return {
-        appName: appReducer.appName
-    }
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        helloWorld: () => console.log('Hello World')
-    }
-};
-
-const Header = ({ appName }) => {
+const Header = () => {
     return <header className="App-header">
-        <Align>{appName}</Align>
+        <Align>
+            <span>Q and A</span>
+
+            <Link to="/">Profile</Link>
+
+            <Link to="/question">Question</Link>
+        </Align>
     </header>
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
