@@ -31,10 +31,6 @@ module.exports = {
 			"error",
 			"tab"
 		],
-		"linebreak-style": [
-			"error",
-			"unix"
-		],
 		"quotes": [
 			"error",
 			"double"
@@ -42,6 +38,7 @@ module.exports = {
 		"semi": [
 			"error",
 			"always"
-		]
+		],
+		"react/prop-types": [0]
 	}
 };

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import './Align.css';
+import "./Align.css";
 
-const Align = ({ children }) => <div className="align">{children}</div>
+const Align = ({ children }) => <div className="align">{children}</div>;
 
 export default Align;
