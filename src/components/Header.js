@@ -5,11 +5,28 @@ import { Link } from "react-router-dom";
 const Header = () => {
     return <header className="App-header">
         <Align>
-            <span>Q and A</span>
+            <div className="nav">
+                <Link
+                    className="nav-link"
+                    to="/"
+                >
+                    Q and A
+                </Link>
 
-            <Link to="/">Profile</Link>
+                <Link
+                    className="nav-link"
+                    to="/"
+                >
+                    Profile
+                </Link>
 
-            <Link to="/question">Question</Link>
+                <Link
+                    className="nav-link"
+                    to="/question"
+                >
+                    Question
+                </Link>
+            </div>
         </Align>
     </header>
 };

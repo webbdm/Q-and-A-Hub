@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 import * as serviceWorker from './serviceWorker';
+
+// 3rd party CSS
 import './index.css';
+import "bootstrap/scss/bootstrap.scss";
 
 ReactDOM.render(
     <App />,
