@@ -18,7 +18,7 @@
   "questions": [
     {
       "id": 1,
-      "text": "Question1",
+      "text": "Why is my X doing Y?",
       "tags": [],
       "created_at": "10am",
       "created_by": 1,
@@ -26,7 +26,7 @@
     },
     {
       "id": 2,
-      "text": "Question2",
+      "text": "Why is my Y doing X?",
       "tags": [],
       "created_at": "11am",
       "created_by": 2,

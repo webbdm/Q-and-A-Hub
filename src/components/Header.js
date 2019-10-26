@@ -2,33 +2,33 @@ import React from "react";
 import Align from "./layout/Align";
 import { Link } from "react-router-dom";
 
+import './Header.scss';
+
 const Header = () => {
-	return <header className="App-header">
-		<Align>
-			<div className="nav">
-				<Link
-					className="nav-link"
-					to="/"
-				>
-                    Q and A
-				</Link>
+  return <header className="App-header">
+    <nav className="navbar ">
+      <div href="#" className="navbar-brand">Q and A</div>
+      <div className="nav-links">
+        <Link
+          className="nav-link"
+          to="/profile"
+        >
+          Profile
+  			</Link>
 
-				<Link
-					className="nav-link"
-					to="/"
-				>
-                    Profile
-				</Link>
-
-				<Link
-					className="nav-link"
-					to="/question"
-				>
-                    Question
-				</Link>
-			</div>
-		</Align>
-	</header>;
+        <Link
+          className="nav-link"
+          to="/"
+        >
+          Question
+  			</Link>
+      </div>
+    </nav>
+    <Align>
+      <div className="nav">
+      </div>
+    </Align>
+  </header>;
 };
 
 export default Header;
