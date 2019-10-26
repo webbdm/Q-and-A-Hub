@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Align.sass';
+import './Align.css';
 
 const Align = ({ children }) => <div className="align">{children}</div>
 

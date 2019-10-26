@@ -5,7 +5,7 @@ import store from './redux/redux.js';
 import Header from './components/Header';
 import Main from './components/Main';
 
-import './App.sass';
+import './App.css';
 
 class App extends Component {
   render() {
