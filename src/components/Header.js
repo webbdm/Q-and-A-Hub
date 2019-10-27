@@ -7,7 +7,7 @@ const Header = ({
 	handleLogout,
 	isAuthenticated
 }) => {
-	return <header className="App-header">
+	return <header className="App-header pl-4">
 		<nav className="navbar ">
 			<div href="#" className="navbar-brand">Mentorship Hub</div>
 
