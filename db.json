@@ -102,7 +102,8 @@
       "tags": [
         "android"
       ],
-      "id": 4
+      "id": 4,
+      "user_id": "4"
     },
     {
       "bio": "yay",
@@ -112,7 +113,8 @@
         "ajax",
         "angularjs"
       ],
-      "id": 5
+      "id": 5,
+      "user_id": "5"
     },
     {
       "bio": "dffasdfas",
@@ -121,7 +123,8 @@
       "tags": [
         ".net"
       ],
-      "id": 6
+      "id": 6,
+      "user_id": "6"
     }
   ]
 }

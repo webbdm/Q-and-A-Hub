@@ -6,13 +6,7 @@ import Select from "react-select";
 const animatedComponents = makeAnimated();
 
 class MultiSelectTag extends Component {
-	constructor() {
-		super();
-
-		this.handleChange = this.handleChange.bind(this);
-	}
-
-	handleChange(selectedOptions) {
+	handleChange = (selectedOptions) => {
 		this.props.onChange({
 			target: {
 				id: this.props.id,

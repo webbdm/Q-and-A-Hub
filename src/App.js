@@ -16,36 +16,25 @@ import Question from "./components/question/Question";
 import "./App.css";
 
 class App extends Component {
-	constructor() {
-		super();
-
-		this.state = {
-			isAuthenticated: true,
-			isNewUser: false,
-			profiles: [],
-			userId: 1,
-			userProfile: {}
-		};
-
-		this.getAllProfiles = this.getAllProfiles.bind(this);
-		this.setAuthedUserData = this.setAuthedUserData.bind(this);
+	state = {
+		isAuthenticated: true,
+		isNewUser: false,
+		profiles: [],
+		userId: 1,
+		userProfile: {}
 	}
 
-	getAllProfiles() {
+	getAllProfiles = async () => {
 		// TODO: exclude the auther users profile once the API is active
-		return profiles.get({ params: { user_id_ne: this.state.userId } })
-			.then(({ data }) => {
-				this.setState(state => ({ ...state, profiles: data }));
-			});
+		const { data } = await profiles.get({ params: { user_id_ne: this.state.userId } });
+		this.setState(state => ({ ...state, profiles: data }));
 	}
 
 	// TODO: make this work with API
-	getAuthedUserData() {
-		return profiles.get({ params: { user_id: this.state.userId } })
-			.then(({ data }) => {
-				const [firstUserData = {}] = data;
-				this.setAuthedUserData(firstUserData);
-			});
+	getAuthedUserData = async () => {
+		const { data } = await profiles.get({ params: { user_id: this.state.userId } });
+		const [firstUserData = {}] = data;
+		this.setAuthedUserData(firstUserData);
 	}
 
 	handleLogin = () => {
@@ -58,7 +47,7 @@ class App extends Component {
 		this.setState({ isAuthenticated: false });
 	}
 
-	setAuthedUserData(userData) {
+	setAuthedUserData = (userData) => {
 		this.setState({
 			isNewUser: !Object.keys(userData).length,
 			userProfile: userData
