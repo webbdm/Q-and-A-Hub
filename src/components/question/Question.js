@@ -6,7 +6,7 @@ import "./Question.scss";
 
 const Answer = ({ text }) => <p className="answer">{text}</p>;
 
-const QuestionCard = ({ id, text, answers }) => {
+const QuestionCard = ({ id, text, answers = [] }) => {
 	const [newAnswer, setNewAnswer] = useState("Type your answer");
 
 	const handleKeyPress = (e) => {
@@ -14,23 +14,28 @@ const QuestionCard = ({ id, text, answers }) => {
 		setNewAnswer(e.target.value);
 
 		if (e.keyCode === 13 && e.shiftKey === false) {
-			//e.preventDefault();
+			e.preventDefault();
 			answersApi.post({
 				"text": newAnswer,
 				"created_at": "11:30am",
 				"question_id": id,
 				"created_by": "3"
 			});
+
+
 		}
 
 	};
+
 	return (<div className="question">
 		<div className="card">
 			<div className="card-header">
 				<h3>{text}</h3>
 			</div>
+			<p style={{ "padding": "0 20px", "margin": 0, "color": "black" }}>{answers.length} answers</p>
 			<div className="card-body">
-				{answers && answers.map(answer => <Answer key={answer.id} text={answer.text} />)}
+				{answers && answers.length ? answers.map(answer => <Answer key={answer.id} text={answer.text} />)
+					: <p>No answers yet. Be the first!</p>}
 			</div>
 			<div className="input-group">
 				<div className="input-group-prepend">
@@ -71,12 +76,17 @@ class Question extends Component {
 	componentDidMount() {
 		this.getQuestions();
 	}
+
 	render() {
-		return (
-			<div className="question-wrapper">
-				{this.state.questions.map(question => <QuestionCard key={question.id} id={question.id} answers={question.answers} text={question.text} />)}
-			</div>
-		);
+		return <div className="question-wrapper">
+			{this.state.questions.map(question => {
+				return <QuestionCard
+					key={question.id}
+					id={question.id}
+					answers={question.answers}
+					text={question.text} />
+			})}
+		</div>
 	}
 }
 
