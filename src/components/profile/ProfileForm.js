@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { isEqual } from "lodash";
 import { profiles } from "./../../providers/api";
 import MultiSelectTag from "./../global/MultiSelectTag";
+import Spinner from "./../global/Spinner";
 
 class ProfileForm extends Component {
 	constructor() {
 		super();
 
 		this.state = {
+			isLoading: false,
 			isNewUser: false,
 			profileData: {
 				bio: "",
@@ -19,6 +21,21 @@ class ProfileForm extends Component {
 
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleOnSubmit = this.handleOnSubmit.bind(this);
+		this.handleResetForm = this.handleResetForm.bind(this);
+		this.isButtonDisabled = this.isButtonDisabled.bind(this);
+	}
+
+	isButtonDisabled() {
+		const { profileData } = this.state;
+		const { bio, cohort, name } = profileData;
+
+		if (isEqual(profileData, this.props.userProfile)) {
+			return true;
+		} else if (!bio || !cohort || !name) {
+			return true;
+		}
+
+		return false;
 	}
 
 	handleOnChange({ target }) {
@@ -31,16 +48,20 @@ class ProfileForm extends Component {
 	}
 
 	handleOnSubmit() {
-		const formattedData = {
-			...this.state.profileData,
-			tags: this.state.profileData.tags.map(({ value }) => value)
-		};
+		const { profileData } = this.state;
+		this.setState({ isLoading: true });
 
-		if (this.props.isNewUser) {
-			profiles.post(formattedData);
-		} else {
-			profiles.put(formattedData, formattedData.id);
-		}
+		const methodVerb = this.props.isNewUser ? "post" : "put";
+
+		profiles[methodVerb](profileData)
+			.then(() => {
+				this.setState({ isLoading: false });
+				this.props.setAuthedUserData(profileData);
+			});
+	}
+
+	handleResetForm() {
+		this.setState({ profileData: this.props.userProfile });
 	}
 
 	componentDidUpdate(prevProps) {
@@ -49,33 +70,35 @@ class ProfileForm extends Component {
 		this.setState({ profileData: this.props.userProfile });
 	}
 
+	componentWillMount() {
+		this.setState(state => ({ profileData: { ...state.profileData, ...this.props.userProfile }}));
+	}
+
 	render() {
 		const { isNewUser } = this.props;
-		const { profileData } = this.state;
+		const { isLoading, profileData } = this.state;
 
 		return <div className="w-75 m-auto">
 			<h4 className="mb-4">{isNewUser ? "Create" : ""} Your Profile</h4>
 
 			<div className="row">
-				<div className="form-group col-sm-12 col-md-6 row">
-					<label htmlFor="name" className="col-sm-2">Name</label>
-
+				<div className="form-group col-sm-12 col-md-8">
 					<input
-						className="form-control col-sm-10"
+						className="form-control"
 						id="name"
 						onChange={this.handleOnChange}
+						placeholder="Name"
 						type="text"
 						value={profileData.name}
 					/>
 				</div>
 
-				<div className="form-group col-sm-12 col-md-6 row">
-					<label htmlFor="cohort" className="col-sm-2 mr-2">Cohort</label>
-
+				<div className="form-group col-sm-12 col-md-4">
 					<input
-						className="form-control col-sm-8"
+						className="form-control"
 						id="cohort"
 						onChange={this.handleOnChange}
+						placeholder="Cohort"
 						type="text"
 						value={profileData.cohort}
 					/>
@@ -83,20 +106,17 @@ class ProfileForm extends Component {
 			</div>
 
 			<div className="form-group">
-				<label htmlFor="bio">Bio</label>
-
 				<textarea
 					className="form-control"
 					id="bio"
 					onChange={this.handleOnChange}
+					placeholder="Tell us about yourself."
 					rows="5"
 					value={profileData.bio}
 				/>
 			</div>
 
 			<div className="form-group">
-				<label htmlFor="tag">Tags</label>
-
 				<MultiSelectTag
 					id="tags"
 					onChange={this.handleOnChange}
@@ -104,12 +124,26 @@ class ProfileForm extends Component {
 				/>
 			</div>
 
-			<div className="d-flex justify-content-between">
+			<div>
 				<button
-					className="btn btn-primary"
+					className="btn btn-primary mr-2"
+					disabled={this.isButtonDisabled()}
 					onClick={this.handleOnSubmit}
 				>
                     Save
+
+					{isLoading && <Spinner
+						height="1rem"
+						width="1rem"
+					/>}
+				</button>
+
+				<button
+					className="btn btn-danger"
+					disabled={this.isButtonDisabled()}
+					onClick={this.handleResetForm}
+				>
+                    Reset
 				</button>
 			</div>
 		</div>;
