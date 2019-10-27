@@ -47,7 +47,7 @@ class App extends Component {
 
 					<div className="container">
 						<Switch>
-							<Route path="/question">
+							<Route exact path="/">
 								<Question />
 							</Route>
 

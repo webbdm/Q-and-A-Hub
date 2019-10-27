@@ -1,5 +1,6 @@
 header {
     height: 100px;
+    color: white;
 }
     
 .App-header {
@@ -7,6 +8,9 @@ header {
         .nav-links {
             display: flex;
             flex-direction: row;
+            a {
+                color: white;
+            }
         }
     }
 }

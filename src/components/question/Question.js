@@ -4,7 +4,7 @@ import { questionsApi, answersApi } from "../../providers/api";
 
 import './Question.scss';
 
-const Answer = ({ text }) => <h1>{text}</h1>;
+const Answer = ({ text }) => <p className="answer">{text}</p>;
 
 const QuestionCard = ({ id, text, answers }) => {
 	const [newAnswer, setNewAnswer] = useState('Type your answer');
@@ -27,14 +27,14 @@ const QuestionCard = ({ id, text, answers }) => {
 	return (<div className="question">
 		<div className="card">
 			<div className="card-header">
-				{text}
+				<h3>{text}</h3>
 			</div>
 			<div className="card-body">
 				{answers && answers.map(answer => <Answer key={answer.id} text={answer.text} />)}
 			</div>
 			<div className="input-group">
 				<div className="input-group-prepend">
-					<span className="input-group-text">With textarea</span>
+					<span className="input-group-text">Answer</span>
 				</div>
 				<textarea onKeyUp={(e) => handleKeyPress(e)} className="form-control" aria-label="With textarea"></textarea>
 			</div>
