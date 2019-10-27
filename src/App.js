@@ -18,11 +18,21 @@ class App extends Component {
 
 		this.state = {
 			isNewUser: false,
-			userId: 0,
+			profiles: [],
+			userId: 1,
 			userProfile: {}
 		};
 
+		this.getAllProfiles = this.getAllProfiles.bind(this);
 		this.setAuthedUserData = this.setAuthedUserData.bind(this);
+	}
+
+	getAllProfiles() {
+		// TODO: exclude the auther users profile once the API is active
+		return profiles.get({ params: { user_id_ne: this.state.userId } })
+			.then(({ data }) => {
+				this.setState(state => ({ ...state, profiles: data }));
+			});
 	}
 
 	// TODO: make this work with API
@@ -42,7 +52,10 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		this.getAuthedUserData();
+		Promise.all([
+			this.getAllProfiles(),
+			this.getAuthedUserData()
+		]);
 	}
 
 	render() {
@@ -57,6 +70,7 @@ class App extends Component {
 								path="/profile"
 								render={() => <Profile
 									isNewUser={this.state.isNewUser}
+									profiles={this.state.profiles}
 									setAuthedUserData={this.setAuthedUserData}
 									userProfile={this.state.userProfile}
 								/>}

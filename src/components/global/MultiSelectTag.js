@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import makeAnimated from "react-select/animated";
 import tags from "./tags";
 import Select from "react-select";
 
+const animatedComponents = makeAnimated();
 
 class MultiSelectTag extends Component {
 	constructor() {
@@ -10,7 +12,7 @@ class MultiSelectTag extends Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	handleChange(selectedOptions ) {
+	handleChange(selectedOptions) {
 		this.props.onChange({
 			target: {
 				id: this.props.id,
@@ -20,6 +22,8 @@ class MultiSelectTag extends Component {
 	}
 
 	render() {
+		const { placeholder } = this.props;
+
 		const formattedTags = this.props.tags.reduce((accumulator, tagValue) => {
 			const tag = tags.find(({ value }) => value === tagValue);
 			return tag ? [ ...accumulator, tag ] : accumulator;
@@ -27,10 +31,11 @@ class MultiSelectTag extends Component {
 
 		return <Select
 			className={this.props.className || ""}
+			components={animatedComponents}
 			isMulti={true}
 			onChange={this.handleChange}
 			options={tags}
-			placeholder="Select tags..."
+			placeholder={placeholder ? placeholder : "Select tags..."}
 			value={formattedTags}
 		/>;
 	}
