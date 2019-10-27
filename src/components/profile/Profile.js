@@ -4,19 +4,13 @@ import ProfileList from "./ProfileList";
 import MultiSelectTag from "./../global/MultiSelectTag";
 
 class Profile extends Component {
-	constructor() {
-		super();
+	hrRef = null;
 
-		this.state = {
-			tagFilters: []
-		};
+	state = {
+		tagFilters: []
+	};
 
-		this.hrRef = null;
-
-		this.handleAddTagFilter = this.handleAddTagFilter.bind(this);
-	}
-
-	handleAddTagFilter(tag) {
+	handleAddTagFilter = (tag) => {
 		if (this.state.tagFilters.includes(tag)) return;
 		this.setState(state => ({ tagFilters: [ ...state.tagFilters, tag ] }));
 		this.hrRef.scrollIntoView({ behavior: "smooth" });

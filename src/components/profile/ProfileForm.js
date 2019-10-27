@@ -5,27 +5,18 @@ import MultiSelectTag from "./../global/MultiSelectTag";
 import Spinner from "./../global/Spinner";
 
 class ProfileForm extends Component {
-	constructor() {
-		super();
-
-		this.state = {
-			isLoading: false,
-			isNewUser: false,
-			profileData: {
-				bio: "",
-				cohort: "",
-				name: "",
-				tags: []
-			}
-		};
-
-		this.handleOnChange = this.handleOnChange.bind(this);
-		this.handleOnSubmit = this.handleOnSubmit.bind(this);
-		this.handleResetForm = this.handleResetForm.bind(this);
-		this.isButtonDisabled = this.isButtonDisabled.bind(this);
+	state = {
+		isLoading: false,
+		isNewUser: false,
+		profileData: {
+			bio: "",
+			cohort: "",
+			name: "",
+			tags: []
+		}
 	}
 
-	isButtonDisabled() {
+	isButtonDisabled = () => {
 		const { profileData } = this.state;
 		const { bio, cohort, name } = profileData;
 
@@ -38,7 +29,7 @@ class ProfileForm extends Component {
 		return false;
 	}
 
-	handleOnChange({ target }) {
+	handleOnChange = ({ target }) => {
 		this.setState(state => ({
 			profileData: {
 				...state.profileData,
@@ -47,7 +38,7 @@ class ProfileForm extends Component {
 		}));
 	}
 
-	handleOnSubmit() {
+	handleOnSubmit = () => {
 		const { profileData } = this.state;
 		this.setState({ isLoading: true });
 
@@ -60,7 +51,7 @@ class ProfileForm extends Component {
 			});
 	}
 
-	handleResetForm() {
+	handleResetForm = () => {
 		this.setState({ profileData: this.props.userProfile });
 	}
 
