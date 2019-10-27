@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { profiles } from "./providers/api";
 
+import Community from "./components/community/Community";
 import Header from "./components/Header";
 import Profile from "./components/profile/Profile";
 import Question from "./components/question/Question";
@@ -39,7 +40,7 @@ class App extends Component {
 	getAuthedUserData() {
 		return profiles.get({ params: { user_id: this.state.userId } })
 			.then(({ data }) => {
-				const [ firstUserData = {} ] = data;
+				const [firstUserData = {}] = data;
 				this.setAuthedUserData(firstUserData);
 			});
 	}
@@ -66,6 +67,12 @@ class App extends Component {
 
 					<div className="container">
 						<Switch>
+							<Route exact path="/">
+								<Question />
+							</Route>
+							<Route path="/community">
+								<Community />
+							</Route>
 							<Route
 								path="/profile"
 								render={() => <Profile
@@ -75,10 +82,6 @@ class App extends Component {
 									userProfile={this.state.userProfile}
 								/>}
 							/>
-
-							<Route path="/">
-								<Question />
-							</Route>
 						</Switch>
 					</div>
 				</div>

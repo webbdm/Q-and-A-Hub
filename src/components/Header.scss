@@ -1,5 +1,10 @@
 header {
     height: 100px;
+    color: white;
+    background-color: #384D76;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-around;
 }
     
 .App-header {
@@ -7,6 +12,9 @@ header {
         .nav-links {
             display: flex;
             flex-direction: row;
+            a {
+                color: white;
+            }
         }
     }
 }

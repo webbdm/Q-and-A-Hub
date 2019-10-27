@@ -1,0 +1,9 @@
+.community-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .card {
+        margin: 20px;
+        color: white;
+    }
+}

@@ -1,7 +1,54 @@
+$dark: #2B3042;
+
 .question {
+  color: white;
   padding: 5%;
   .card-body {
     height: 200px;
     overflow: scroll;
   }
+}
+
+.input-group-text {
+  color: white !important;
+}
+
+.card {
+  border: none !important;
+  background-color: $dark !important;
+  //opacity: 0.8;
+  .card-body,
+  .card-header,
+  input,
+  .input-group-text {
+    border: none !important;
+    background-color: $dark;
+  }
+  .addAnswer {
+    margin-right: 5px;
+    border: none !important;
+    background-color: $dark;
+    color: white;
+    &:hover{
+      font-weight: bold;
+    }
+  }
+  input {
+    color: white !important;
+    resize: none;
+    border: none !important;
+    outline: none !important;
+    &:focus{
+      background-color: $dark;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none;
+    }
+  }
+}
+
+.answer {
+  display: block;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
 }
