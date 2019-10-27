@@ -18,16 +18,16 @@ const QuestionCard = ({ id, text, answers = [], refreshAnswers, profiles }) => {
 		setNewAnswer(e.target.value);
 	};
 
-	const submitAnswer = () => {
+	const submitAnswer = async () => {
 		const obj = {
 			"text": newAnswer,
 			"created_at": "11:30am",
 			"question_id": id,
 			"created_by": "3"
 		};
-		answersApi.post(obj);
+		const res = await answersApi.post(obj);
 		inputRef.current.value = null;
-		refreshAnswers(obj);
+		refreshAnswers(res.data);
 	};
 
 	return (<div className="question">
@@ -63,7 +63,7 @@ const AddQuestion = ({ userId, profiles, refreshQuestions }) => {
 		setNewQuestion(e.target.value);
 	};
 
-	const submitQuestion = () => {
+	const submitQuestion = async () => {
 		const obj = {
 			"text": question,
 			"created_at": "11:30am",
@@ -71,9 +71,9 @@ const AddQuestion = ({ userId, profiles, refreshQuestions }) => {
 			"created_by": user.id,
 			"tags": []
 		};
-		questionsApi.post(obj);
+		const res = await questionsApi.post(obj);
 		inputRef.current.value = null;
-		refreshQuestions(obj);
+		refreshQuestions({ ...res.data, answers: [] });
 	};
 
 	return (<div style={{ "padding": "0 10%" }} className="input-group mb-3">
@@ -103,13 +103,11 @@ class Question extends Component {
 	};
 
 	refreshQuestions = newQuestion => {
-		console.log({ questions: [...this.props.questions, newQuestion] }, "yay");
 		this.setState({ questions: [...this.props.questions, newQuestion] });
 	};
-
 	render() {
 		return <React.Fragment>
-			<AddQuestion refreshQuestions={this.refreshQuestions} userId={this.props.userId} profiles={this.props.profiles} />
+			<AddQuestion refreshQuestions={this.props.refreshQuestions} userId={this.props.userId} profiles={this.props.profiles} />
 			<div className="question-wrapper">
 				{this.props.questions.map(question => {
 					return <QuestionCard
@@ -118,7 +116,7 @@ class Question extends Component {
 						answers={question.answers}
 						text={question.text}
 						profiles={this.props.profiles}
-						refreshAnswers={this.refreshAnswers} />;
+						refreshAnswers={this.props.refreshAnswers} />;
 
 				})}
 			</div>

@@ -33,12 +33,12 @@ const Header = ({
 					Profile
 				</Link>
 
-				<span
+				{/* <span
 					className="nav-link"
 					onClick={handleLogout}
 				>
 					Logout
-				</span>
+				</span> */}
 			</div>}
 		</nav>
 	</header>;
