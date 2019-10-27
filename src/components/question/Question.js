@@ -73,7 +73,6 @@ const AddQuestion = ({ userId, profiles, refreshQuestions }) => {
 		};
 		questionsApi.post(obj);
 		inputRef.current.value = null;
-		console.log(obj);
 		refreshQuestions(obj);
 	};
 
@@ -86,31 +85,9 @@ const AddQuestion = ({ userId, profiles, refreshQuestions }) => {
 };
 
 class Question extends Component {
-	// constructor(props) {
-	// 	super();
-	// 	console.log(props, '123');
-	// 	this.state = {
-	// 		questions: props.questions,
-	// 		//profiles: props.profiles,
-	// 		currentUser: props.userId
-	// 	};
-	// }
-
-	refreshAnswers = newAnswer => {
-		this.setState({
-			questions: this.props.questions.map(question => question.id === newAnswer.question_id ?
-				{ ...question, answers: [...question.answers, newAnswer] } : question)
-		});
-	};
-
-	refreshQuestions = newQuestion => {
-		console.log({ questions: [...this.props.questions, newQuestion] }, 'yay');
-		this.setState({ questions: [...this.props.questions, newQuestion] });
-	};
-
 	render() {
 		return <React.Fragment>
-			<AddQuestion refreshQuestions={this.refreshQuestions} userId={this.props.userId} profiles={this.props.profiles} />
+			<AddQuestion refreshQuestions={this.props.refreshQuestions} userId={this.props.userId} profiles={this.props.profiles} />
 			<div className="question-wrapper">
 				{this.props.questions.map(question => {
 					return <QuestionCard
@@ -119,7 +96,7 @@ class Question extends Component {
 						answers={question.answers}
 						text={question.text}
 						profiles={this.props.profiles}
-						refreshAnswers={this.refreshAnswers} />;
+						refreshAnswers={this.props.refreshAnswers} />;
 
 				})}
 			</div>

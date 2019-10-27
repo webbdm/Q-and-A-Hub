@@ -80,8 +80,23 @@ class App extends Component {
 		await this.getQuestions();
 	}
 
+	refreshAnswers = newAnswer => {
+		this.setState({
+			questions: this.state.questions.map(question => question.id === newAnswer.question_id ?
+				{ ...question, answers: [...question.answers, newAnswer] } : question)
+		});
+	};
+
+	refreshQuestions = newQuestion => {
+		console.log({ questions: [...this.state.questions, newQuestion] }, 'yay');
+		this.setState({ questions: [...this.state.questions, newQuestion] });
+	};
+
+
+
 	render() {
 		const { isAuthenticated, userId, profiles, questions } = this.state;
+
 
 		return (
 			<Router>
@@ -111,7 +126,12 @@ class App extends Component {
 								isAuthenticated={isAuthenticated}
 								path="/"
 							>
-								<Question questions={questions} userId={userId} profiles={profiles} />
+								<Question
+									questions={questions}
+									userId={userId}
+									profiles={profiles}
+									refreshQuestions={this.refreshQuestions}
+									refreshAnswers={this.refreshAnswers} />
 							</PrivateRoute>
 
 							<PrivateRoute
