@@ -7,7 +7,7 @@ import "./Question.scss";
 const Answer = ({ text }) => <p className="answer">{text}</p>;
 
 const QuestionCard = ({ id, text, answers = [], refreshAnswers }) => {
-	const [newAnswer, setNewAnswer] = useState('');
+	const [newAnswer, setNewAnswer] = useState("");
 	const inputRef = useRef(null);
 
 	const handleKeyPress = (e) => {
@@ -20,7 +20,7 @@ const QuestionCard = ({ id, text, answers = [], refreshAnswers }) => {
 			"created_at": "11:30am",
 			"question_id": id,
 			"created_by": "3"
-		}
+		};
 		answersApi.post(obj);
 		inputRef.current.value = null;
 		refreshAnswers(obj);
@@ -82,7 +82,7 @@ class Question extends Component {
 		this.setState({
 			questions: this.state.questions.map(question => question.id === newAnswer.question_id ?
 				{ ...question, answers: [...question.answers, newAnswer] } : question)
-		})
+		});
 	};
 
 
@@ -94,10 +94,10 @@ class Question extends Component {
 					id={question.id}
 					answers={question.answers}
 					text={question.text}
-					refreshAnswers={this.refreshAnswers} />
+					refreshAnswers={this.refreshAnswers} />;
 
 			})}
-		</div>
+		</div>;
 	}
 }
 

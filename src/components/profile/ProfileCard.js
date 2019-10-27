@@ -9,7 +9,7 @@ const ProfileCard = ({
 	name,
 	tags
 }) => (
-	<div className="border rounded p-4 mb-4">
+	<div className="border border-dark rounded p-4 mb-4">
 		<div className="d-flex align-items-end mb-4">
 			<h4 className="m-0 mr-2">{name}</h4>
 
