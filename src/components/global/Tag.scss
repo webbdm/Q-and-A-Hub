@@ -1,0 +1,22 @@
+.tag {
+	color: #001b44;
+	display: inline-block;
+	font-size: .875rem;
+	border: 1px solid #001b44;
+	border-width: .09rem;
+}
+
+.grow {
+	-moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: transform .25s ease-out;
+}
+
+.grow:hover, .grow:focus {
+    transform: scale(1.05);
+}
+
+.grow:active {
+    transform: scale(.9);
+}
