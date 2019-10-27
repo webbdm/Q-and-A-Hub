@@ -4,7 +4,7 @@ import {
 	Switch,
 	Route,
 } from "react-router-dom";
-import { profiles, questionsApi, answersApi } from "./providers/api";
+import { profiles as profilesApi, questionsApi, answersApi } from "./providers/api";
 
 import Community from "./components/community/Community";
 import Header from "./components/Header";
@@ -21,21 +21,22 @@ class App extends Component {
 		isNewUser: false,
 		profiles: [],
 		questions: [],
-		userId: 1,
+		userId: "asdsadhjk1",
 		userProfile: {}
 	}
 
 	getAllProfiles = async () => {
 		// TODO: exclude the auther users profile once the API is active
-		const { data } = await profiles.get({ params: { user_id_ne: this.state.userId } });
-		this.setState(state => ({ ...state, profiles: data }));
+		const { data } = await profilesApi.get();
+		const profiles = data.filter(({ userId }) => userId !== this.state.userId);
+		this.setState(state => ({ ...state, profiles }));
 	}
 
 	// TODO: make this work with API
 	getAuthedUserData = async () => {
-		const { data } = await profiles.get({ params: { user_id: this.state.userId } });
-		const [firstUserData = {}] = data;
-		this.setAuthedUserData(firstUserData);
+		const { data } = await profilesApi.get({ params: { user_id: this.state.userId } });
+		const userProfile = data.find(({ userId }) => userId === this.state.userId);
+		this.setAuthedUserData(userProfile);
 	}
 
 	// TODO: make this work with API

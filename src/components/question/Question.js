@@ -6,7 +6,7 @@ import "./Question.scss";
 
 const Answer = ({ answerer, text, profiles = [] }) => {
 	const user = profiles.find(profile => profile.id = answerer);
-	return (<span className="answer"><p>{text}</p><p className="user-name">{user && user.name}</p></span>)
+	return (<span className="answer"><p>{text}</p><p className="user-name">{user && user.name}</p></span>);
 };
 
 
@@ -55,7 +55,7 @@ const QuestionCard = ({ id, text, answers = [], refreshAnswers, profiles }) => {
 
 const AddQuestion = ({ userId, profiles, refreshQuestions }) => {
 	const [question, setNewQuestion] = useState("");
-	const inputRef = useRef(null)
+	const inputRef = useRef(null);
 
 	const user = profiles.find(profile => profile.id = userId);
 
@@ -77,12 +77,12 @@ const AddQuestion = ({ userId, profiles, refreshQuestions }) => {
 		refreshQuestions(obj);
 	};
 
-	return (<div style={{ 'padding': '0 10%' }} className="input-group mb-3">
+	return (<div style={{ "padding": "0 10%" }} className="input-group mb-3">
 		<input ref={inputRef} onKeyUp={(e) => handleKeyPress(e)} type="text" className="form-control" placeholder="Ask a question" aria-label="Recipient's username" aria-describedby="button-addon2" />
 		<div className="input-group-append">
 			<button onClick={() => submitQuestion()} className="btn btn-outline-secondary" type="button" id="button-addon2">Ask!</button>
 		</div>
-	</div>)
+	</div>);
 };
 
 class Question extends Component {
@@ -104,7 +104,7 @@ class Question extends Component {
 	};
 
 	refreshQuestions = newQuestion => {
-		console.log({ questions: [...this.props.questions, newQuestion] }, 'yay');
+		console.log({ questions: [...this.props.questions, newQuestion] }, "yay");
 		this.setState({ questions: [...this.props.questions, newQuestion] });
 	};
 

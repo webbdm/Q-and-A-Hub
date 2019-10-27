@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:4000";
+// const baseURL = "http://localhost:4000";
+const baseURL = "https://cd8e52e4.ngrok.io/api";
 
 // export const api = {
 //     get: url => axios.get(`${baseURL}` + `${url}`),
@@ -10,18 +11,18 @@ const baseURL = "http://localhost:4000";
 // }
 
 export const profiles = {
-    get: options => axios.get(`${baseURL}/profiles`, options),
-    post: data => axios.post(`${baseURL}/profiles`, data),
-    put: data => axios.put(`${baseURL}/profiles/${data.id}`, data),
-    delete: id => axios.delete(`${baseURL}/profiles`, id)
+	get: options => axios.get(`${baseURL}/profiles`, options),
+	post: data => axios.post(`${baseURL}/profiles`, data),
+	put: data => axios.put(`${baseURL}/profiles/${data.id}`, data),
+	delete: id => axios.delete(`${baseURL}/profiles`, id)
 };
 
 export const questionsApi = {
-    get: () => axios.get(`${baseURL}/questions`),
-    post: question => axios.post(`${baseURL}/questions`, question)
+	get: () => axios.get(`${baseURL}/questions`),
+	post: question => axios.post(`${baseURL}/questions`, question)
 };
 
 export const answersApi = {
-    get: options => axios.get(`${baseURL}/answers`, options),
-    post: answer => axios.post(`${baseURL}/answers`, answer)
+	get: options => axios.get(`${baseURL}/answers`, options),
+	post: answer => axios.post(`${baseURL}/answers`, answer)
 };
