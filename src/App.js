@@ -16,22 +16,15 @@ import Question from "./components/question/Question";
 import "./App.css";
 
 class App extends Component {
-	constructor() {
-		super();
-
-		this.state = {
-			isAuthenticated: false,
-			isNewUser: false,
-			profiles: [],
-			userId: 1,
-			userProfile: {}
-		};
-
-		this.getAllProfiles = this.getAllProfiles.bind(this);
-		this.setAuthedUserData = this.setAuthedUserData.bind(this);
+	state = {
+		isAuthenticated: true,
+		isNewUser: false,
+		profiles: [],
+		userId: 1,
+		userProfile: {}
 	}
 
-	getAllProfiles() {
+	getAllProfiles = () => {
 		// TODO: exclude the auther users profile once the API is active
 		return profiles.get({ params: { user_id_ne: this.state.userId } })
 			.then(({ data }) => {
@@ -40,7 +33,7 @@ class App extends Component {
 	}
 
 	// TODO: make this work with API
-	getAuthedUserData() {
+	getAuthedUserData = () => {
 		return profiles.get({ params: { user_id: this.state.userId } })
 			.then(({ data }) => {
 				const [firstUserData = {}] = data;
@@ -58,7 +51,7 @@ class App extends Component {
 		this.setState({ isAuthenticated: false });
 	}
 
-	setAuthedUserData(userData) {
+	setAuthedUserData = (userData) => {
 		this.setState({
 			isNewUser: !Object.keys(userData).length,
 			userProfile: userData
