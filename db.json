@@ -27,68 +27,12 @@
       "question_id": 1,
       "created_by": "3",
       "id": "C_KVBqg"
-    },
-    {
-      "text": "ffdgfg",
-      "created_at": "11:30am",
-      "question_id": 1,
-      "created_by": "3",
-      "id": "3Cum_z4"
-    },
-    {
-      "text": "ddsfdsfsdf",
-      "created_at": "11:30am",
-      "question_id": 1,
-      "created_by": "3",
-      "id": "yCYH0Dg"
-    },
-    {
-      "text": "yay",
-      "created_at": "11:30am",
-      "question_id": 1,
-      "created_by": "3",
-      "id": "0pmauZJ"
-    },
-    {
-      "text": "seven",
-      "created_at": "11:30am",
-      "question_id": 1,
-      "created_by": "3",
-      "id": "CQPRFld"
-    },
-    {
-      "text": "two",
-      "created_at": "11:30am",
-      "question_id": 2,
-      "created_by": "3",
-      "id": "bbYNXcT"
-    },
-    {
-      "text": "THREE",
-      "created_at": "11:30am",
-      "question_id": 2,
-      "created_by": "3",
-      "id": "yNH8Z-X"
-    },
-    {
-      "text": "four",
-      "created_at": "11:30am",
-      "question_id": 2,
-      "created_by": "3",
-      "id": "BMoeJhf"
-    },
-    {
-      "text": "five",
-      "created_at": "11:30am",
-      "question_id": 2,
-      "created_by": "3",
-      "id": "V1V3nmn"
     }
   ],
   "questions": [
     {
       "id": 1,
-      "text": "Why is my X doing Y?",
+      "text": "How do you deploy a .NET project and connect a separate client application?",
       "tags": [],
       "created_at": "10am",
       "created_by": 1,
@@ -96,27 +40,11 @@
     },
     {
       "id": 2,
-      "text": "Why is my Y doing X?",
+      "text": "Does anybody have experience with Python and R? I'm looking to specialize in data science",
       "tags": [],
       "created_at": "11am",
       "created_by": 2,
       "solution_id": 2
-    },
-    {
-      "text": "yay124545452543",
-      "created_at": "11:30am",
-      "solution_id": null,
-      "created_by": 1,
-      "tags": [],
-      "id": 3
-    },
-    {
-      "text": "new444",
-      "created_at": "11:30am",
-      "solution_id": null,
-      "created_by": 1,
-      "tags": [],
-      "id": 4
     }
   ],
   "profiles": [
