@@ -5,13 +5,12 @@ import { questionsApi, answersApi } from "../../providers/api";
 import "./Question.scss";
 
 const Answer = ({ answerer, text, profiles = [] }) => {
-	console.log(profiles);
 	const user = profiles.find(profile => profile.id = answerer);
 	return (<span className="answer"><p>{text}</p><p className="user-name">{user && user.name}</p></span>)
 };
 
 
-const QuestionCard = ({ id, text, answers = [], refreshAnswers, profiles}) => {
+const QuestionCard = ({ id, text, answers = [], refreshAnswers, profiles }) => {
 	const [newAnswer, setNewAnswer] = useState("");
 	const inputRef = useRef(null);
 
@@ -75,7 +74,7 @@ const AddQuestion = ({ userId, profiles, refreshQuestions }) => {
 		questionsApi.post(obj);
 		inputRef.current.value = null;
 		console.log(obj);
-		//refreshQuestions(obj);
+		refreshQuestions(obj);
 	};
 
 	return (<div style={{ 'padding': '0 10%' }} className="input-group mb-3">
@@ -104,9 +103,14 @@ class Question extends Component {
 		});
 	};
 
+	refreshQuestions = newQuestion => {
+		console.log({ questions: [...this.props.questions, newQuestion] }, 'yay');
+		this.setState({ questions: [...this.props.questions, newQuestion] });
+	};
+
 	render() {
 		return <React.Fragment>
-			<AddQuestion userId={this.props.userId} profiles={this.props.profiles} />
+			<AddQuestion refreshQuestions={this.refreshQuestions} userId={this.props.userId} profiles={this.props.profiles} />
 			<div className="question-wrapper">
 				{this.props.questions.map(question => {
 					return <QuestionCard
