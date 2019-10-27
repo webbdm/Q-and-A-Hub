@@ -6,6 +6,7 @@ class Profile extends Component {
 		return <Fragment>
 			<ProfileForm
 				isNewUser={this.props.isNewUser}
+				setAuthedUserData={this.props.setAuthedUserData}
 				userProfile={this.props.userProfile}
 			/>
 

@@ -18,21 +18,27 @@ class App extends Component {
 
 		this.state = {
 			isNewUser: false,
-			userId: 1,
+			userId: 0,
 			userProfile: {}
 		};
+
+		this.setAuthedUserData = this.setAuthedUserData.bind(this);
 	}
 
 	// TODO: make this work with API
 	getAuthedUserData() {
 		return profiles.get({ params: { user_id: this.state.userId } })
 			.then(({ data }) => {
-				const [ firstUserData = {} ] = data;
-				this.setState({
-					isNewUser: !Object.keys(firstUserData).length,
-					userProfile: firstUserData
-				});
+				const [firstUserData = {}] = data;
+				this.setAuthedUserData(firstUserData);
 			});
+	}
+
+	setAuthedUserData(userData) {
+		this.setState({
+			isNewUser: !Object.keys(userData).length,
+			userProfile: userData
+		});
 	}
 
 	componentDidMount() {
@@ -47,17 +53,18 @@ class App extends Component {
 
 					<div className="container">
 						<Switch>
-							<Route exact path="/">
-								<Question />
-							</Route>
-
 							<Route
 								path="/profile"
 								render={() => <Profile
 									isNewUser={this.state.isNewUser}
+									setAuthedUserData={this.setAuthedUserData}
 									userProfile={this.state.userProfile}
 								/>}
 							/>
+
+							<Route path="/">
+								<Question />
+							</Route>
 						</Switch>
 					</div>
 				</div>

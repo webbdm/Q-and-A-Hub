@@ -2,12 +2,12 @@ import React, { Component, useState } from "react";
 
 import { questionsApi, answersApi } from "../../providers/api";
 
-import './Question.scss';
+import "./Question.scss";
 
 const Answer = ({ text }) => <p className="answer">{text}</p>;
 
 const QuestionCard = ({ id, text, answers }) => {
-	const [newAnswer, setNewAnswer] = useState('Type your answer');
+	const [newAnswer, setNewAnswer] = useState("Type your answer");
 
 	const handleKeyPress = (e) => {
 
@@ -23,7 +23,7 @@ const QuestionCard = ({ id, text, answers }) => {
 			});
 		}
 
-	}
+	};
 	return (<div className="question">
 		<div className="card">
 			<div className="card-header">
@@ -40,7 +40,7 @@ const QuestionCard = ({ id, text, answers }) => {
 			</div>
 
 		</div>
-	</div>)
+	</div>);
 };
 
 class Question extends Component {
@@ -60,13 +60,11 @@ class Question extends Component {
 
 				this.setState({ questions: data });
 
-				return Promise.all([data, ...qIds]);
-
-			}).then(([questions, ...answers]) => {
+				return Promise.all(qIds);
+			}).then((answers) => {
 				const ans = answers.map(a => a.data)[0];
 				const qs = this.state.questions;
 				this.setState({ questions: qs.map(q => ({ ...q, answers: ans.filter(a => a.question_id === q.id) })) });
-
 			});
 	}
 
