@@ -31,17 +31,17 @@ const QuestionCard = ({ id, text, answers = [], refreshAnswers }) => {
 			<div className="card-header">
 				<h3>{text}</h3>
 			</div>
-			<p style={{ "padding": "0 20px", "margin": 0, "color": "black" }}>{answers.length} answers</p>
+			<p style={{ "padding": "0 20px", "margin": 0, "color": "white" }}>{answers.length} answers</p>
 			<div className="card-body">
 				{answers && answers.length ? answers.map(answer => <Answer key={answer.id} text={answer.text} />)
 					: <p>No answers yet. Be the first!</p>}
 			</div>
 			<div className="input-group">
 				<div className="input-group-prepend">
-					<span className="input-group-text">Answer</span>
+					<span className="input-group-text">Answer:</span>
 				</div>
 				{/* <textarea ref={inputRef} onKeyUp={(e) => handleKeyPress(e)} className="form-control" aria-label="With textarea"></textarea> */}
-				<input ref={inputRef} onKeyUp={(e) => handleKeyPress(e)} className="form-control" aria-label="Username" aria-describedby="addon-wrapping"></input>
+				<input placeholder="..." ref={inputRef} onKeyUp={(e) => handleKeyPress(e)} className="form-control" aria-label="Username" aria-describedby="addon-wrapping"></input>
 				<button className="addAnswer" onClick={() => submitAnswer()}>Submit</button>
 			</div>
 

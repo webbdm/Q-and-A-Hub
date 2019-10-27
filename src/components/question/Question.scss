@@ -1,4 +1,4 @@
-$dark: #3d3e4d;
+$dark: #2B3042;
 
 .question {
   color: white;
@@ -28,6 +28,7 @@ $dark: #3d3e4d;
     margin-right: 5px;
     border: none !important;
     background-color: $dark;
+    color: white;
     &:hover{
       font-weight: bold;
     }

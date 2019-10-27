@@ -1,7 +1,12 @@
 .App {
-  background: linear-gradient(to bottom right,#3D3E4D, #7E8398);
+  /* background: linear-gradient(to bottom right,#3D3E4D, #7E8398); */
+  background-color: #E1E3E8;
   min-height: 100vh;
   display: grid;
   grid-template-rows: 10% 90%;
+}
+
+.App .container {
+    margin-top: 40px;
 }
 

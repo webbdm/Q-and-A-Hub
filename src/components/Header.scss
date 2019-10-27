@@ -1,6 +1,10 @@
 header {
     height: 100px;
     color: white;
+    background-color: #384D76;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-around;
 }
     
 .App-header {
