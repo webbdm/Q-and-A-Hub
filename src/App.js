@@ -9,6 +9,7 @@ import { profiles } from "./providers/api";
 import Community from "./components/community/Community";
 import Header from "./components/Header";
 import Login from "./components/Login";
+import PrivateRoute from "./components/global/PrivateRoute";
 import Profile from "./components/profile/Profile";
 import Question from "./components/question/Question";
 
@@ -19,6 +20,7 @@ class App extends Component {
 		super();
 
 		this.state = {
+			isAuthenticated: true,
 			isNewUser: false,
 			profiles: [],
 			userId: 1,
@@ -46,6 +48,16 @@ class App extends Component {
 			});
 	}
 
+	handleLogin = () => {
+		// TODO: get to work with server / SSO
+		this.setState({ isAuthenticated: true });
+	}
+
+	handleLogout = () => {
+		// TODO: get to work with server / SSO
+		this.setState({ isAuthenticated: false });
+	}
+
 	setAuthedUserData(userData) {
 		this.setState({
 			isNewUser: !Object.keys(userData).length,
@@ -61,33 +73,57 @@ class App extends Component {
 	}
 
 	render() {
+		const { isAuthenticated } = this.state;
+
 		return (
 			<Router>
 				<div className="App">
-					<Header />
+					<Header
+						handleLogout={this.handleLogout}
+						isAuthenticated={isAuthenticated}
+					/>
 
 					<div className="container">
 						<Switch>
 							<Route exact path="/">
-								<Question profiles={this.state.profiles}/>
+								<Question profiles={this.state.profiles} />
 							</Route>
 							<Route path="/community">
 								<Community />
 							</Route>
 							<Route
 								path="/login"
-								component={Login}
+								render={() => <Login
+									handleLogin={this.handleLogin}
+								/>}
 							/>
 
-							<Route
+							<PrivateRoute
+								exact
+								isAuthenticated={isAuthenticated}
+								path="/"
+							>
+								<Question />
+							</PrivateRoute>
+
+							<PrivateRoute
+								isAuthenticated={isAuthenticated}
+								path="/community"
+							>
+								<Community />
+							</PrivateRoute>
+
+							<PrivateRoute
+								isAuthenticated={isAuthenticated}
 								path="/profile"
-								render={() => <Profile
+							>
+								<Profile
 									isNewUser={this.state.isNewUser}
 									profiles={this.state.profiles}
 									setAuthedUserData={this.setAuthedUserData}
 									userProfile={this.state.userProfile}
-								/>}
-							/>
+								/>
+							</PrivateRoute>
 						</Switch>
 					</div>
 				</div>

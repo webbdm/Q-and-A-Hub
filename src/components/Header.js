@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 
 import "./Header.scss";
 
-const Header = () => {
+const Header = ({
+	handleLogout,
+	isAuthenticated
+}) => {
 	return <header className="App-header">
 		<nav className="navbar ">
 			<div href="#" className="navbar-brand">Mentorship Hub</div>
 
-			<div className="nav-links">
+			{isAuthenticated && <div className="nav-links">
 				<Link
 					className="nav-link"
 					to="/"
@@ -29,7 +32,14 @@ const Header = () => {
 				>
 					Profile
 				</Link>
-			</div>
+
+				<span
+					className="nav-link"
+					onClick={handleLogout}
+				>
+					Logout
+				</span>
+			</div>}
 		</nav>
 	</header>;
 };

@@ -4,9 +4,12 @@ import { questionsApi, answersApi } from "../../providers/api";
 
 import "./Question.scss";
 
-const Answer = ({ text }) => <p className="answer">{text}</p>;
+const Answer = ({ answerer, text, profiles = [] }) => {
+	const user = profiles.find(profile => profile.id = answerer);
+return (<span className="answer"><p>{text}</p><p className="user-name">{user && user.name}</p></span>)
+};
 
-const QuestionCard = ({ id, text, answers = [], refreshAnswers }) => {
+const QuestionCard = ({ id, text, answers = [], refreshAnswers, profiles = [] }) => {
 	const [newAnswer, setNewAnswer] = useState("");
 	const inputRef = useRef(null);
 
@@ -33,7 +36,7 @@ const QuestionCard = ({ id, text, answers = [], refreshAnswers }) => {
 			</div>
 			<p style={{ "padding": "0 20px", "margin": 0, "color": "white" }}>{answers.length} answers</p>
 			<div className="card-body">
-				{answers && answers.length ? answers.map(answer => <Answer key={answer.id} text={answer.text} />)
+				{answers && answers.length ? answers.map(answer => <Answer profiles={profiles} answerer={answer.created_by} key={answer.id} text={answer.text} />)
 					: <p>No answers yet. Be the first!</p>}
 			</div>
 			<div className="input-group">
@@ -96,6 +99,7 @@ class Question extends Component {
 					id={question.id}
 					answers={question.answers}
 					text={question.text}
+					profiles={this.state.profiles}
 					refreshAnswers={this.refreshAnswers} />;
 
 			})}
