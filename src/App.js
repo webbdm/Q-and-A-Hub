@@ -74,6 +74,12 @@ class App extends Component {
 
 					<div className="container">
 						<Switch>
+							<Route exact path="/">
+								<Question profiles={this.state.profiles} />
+							</Route>
+							<Route path="/community">
+								<Community />
+							</Route>
 							<Route
 								path="/login"
 								render={() => <Login

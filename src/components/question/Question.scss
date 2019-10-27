@@ -51,4 +51,10 @@ $dark: #2B3042;
   display: block;
   padding-bottom: 10px;
   border-bottom: 1px solid black;
+  p{
+    margin: 0;
+  }
+  .user-name{
+    font-size: 10px;
+  }
 }
