@@ -50,11 +50,12 @@ const QuestionCard = ({ id, text, answers = [], refreshAnswers }) => {
 };
 
 class Question extends Component {
-	constructor() {
+	constructor(props) {
 		super();
 
 		this.state = {
-			questions: []
+			questions: [],
+			profiles: props.profiles
 		};
 	}
 
@@ -87,6 +88,7 @@ class Question extends Component {
 
 
 	render() {
+		console.log(this.state.profiles);
 		return <div className="question-wrapper">
 			{this.state.questions.map(question => {
 				return <QuestionCard
