@@ -78,7 +78,7 @@ class ProfileForm extends Component {
 		const { isNewUser } = this.props;
 		const { isLoading, profileData } = this.state;
 
-		return <div className="w-75 m-auto">
+		return <div>
 			<h4 className="mb-4">{isNewUser ? "Create" : ""} Your Profile</h4>
 
 			<div className="row">
