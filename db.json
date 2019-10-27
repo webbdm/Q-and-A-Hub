@@ -77,13 +77,18 @@
   ],
   "profiles": [
     {
-      "id": 1,
-      "name": "John Smith",
-      "cohort": "Cohort 10",
-      "tags": [
-        "android"
-      ],
       "bio": "This is my bio",
+      "cohort": "Cohort 10",
+      "name": "John Smith",
+      "tags": [
+        "android",
+        "angularjs",
+        "javascript",
+        "css",
+        "html5",
+        "arrays"
+      ],
+      "id": 1,
       "user_id": "1"
     },
     {
@@ -107,6 +112,15 @@
       ],
       "bio": "This is my bio",
       "user_id": "3"
+    },
+    {
+      "bio": "asdfasf",
+      "cohort": "asdf",
+      "name": "asdf",
+      "tags": [
+        "android"
+      ],
+      "id": 4
     }
   ]
 }

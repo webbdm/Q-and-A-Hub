@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { isEqual } from "lodash";
 import tags from "./tags";
 import Select from "react-select";
 
@@ -8,39 +7,31 @@ class MultiSelectTag extends Component {
 	constructor() {
 		super();
 
-		this.state = {
-			selectedOptions: []
-		};
-
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	handleChange(selectedOptions) {
+	handleChange(selectedOptions ) {
 		this.props.onChange({
 			target: {
 				id: this.props.id,
-				value: selectedOptions
+				value: selectedOptions ? selectedOptions.map(({ value }) => value) : []
 			}
 		});
 	}
 
-	// componentDidUpdate(prevProps) {
-	// 	if (isEqual(this.props.tags, prevProps.tags)) return;
-
-	// 	const formattedTags = this.props.tags.reduce((accumulator, tagValue) => {
-	// 		const tag = tags.find(({ value }) => value === tagValue);
-	// 		return tag ? [ ...accumulator, tag ] : accumulator;
-	// 	}, []);
-	// 	console.log(formattedTags);
-	// 	this.handleChange(formattedTags);
-	// }
-
 	render() {
+		const formattedTags = this.props.tags.reduce((accumulator, tagValue) => {
+			const tag = tags.find(({ value }) => value === tagValue);
+			return tag ? [ ...accumulator, tag ] : accumulator;
+		}, []);
+
 		return <Select
+			className={this.props.className || ""}
 			isMulti={true}
 			onChange={this.handleChange}
 			options={tags}
-			value={this.props.tags}
+			placeholder="Select tags..."
+			value={formattedTags}
 		/>;
 	}
 }
