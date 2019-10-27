@@ -5,12 +5,13 @@ import { questionsApi, answersApi } from "../../providers/api";
 import "./Question.scss";
 
 const Answer = ({ answerer, text, profiles = [] }) => {
+	console.log(profiles);
 	const user = profiles.find(profile => profile.id = answerer);
 	return (<span className="answer"><p>{text}</p><p className="user-name">{user && user.name}</p></span>)
 };
 
 
-const QuestionCard = ({ id, text, answers = [], refreshAnswers, profiles = [] }) => {
+const QuestionCard = ({ id, text, answers = [], refreshAnswers, profiles}) => {
 	const [newAnswer, setNewAnswer] = useState("");
 	const inputRef = useRef(null);
 
@@ -53,64 +54,67 @@ const QuestionCard = ({ id, text, answers = [], refreshAnswers, profiles = [] })
 	</div>);
 };
 
-const AddQuestion = () => {
-	return (<div style={{'padding': '0 10%'}}class="input-group mb-3">
-		<input type="text" class="form-control" placeholder="Ask a question" aria-label="Recipient's username" aria-describedby="button-addon2" />
-		<div class="input-group-append">
-			<button class="btn btn-outline-secondary" type="button" id="button-addon2">Ask!</button>
+const AddQuestion = ({ userId, profiles, refreshQuestions }) => {
+	const [question, setNewQuestion] = useState("");
+	const inputRef = useRef(null)
+
+	const user = profiles.find(profile => profile.id = userId);
+
+	const handleKeyPress = (e) => {
+		setNewQuestion(e.target.value);
+	};
+
+	const submitQuestion = () => {
+		const obj = {
+			"text": question,
+			"created_at": "11:30am",
+			"solution_id": null,
+			"created_by": user.id,
+			"tags": []
+		};
+		questionsApi.post(obj);
+		inputRef.current.value = null;
+		console.log(obj);
+		//refreshQuestions(obj);
+	};
+
+	return (<div style={{ 'padding': '0 10%' }} className="input-group mb-3">
+		<input ref={inputRef} onKeyUp={(e) => handleKeyPress(e)} type="text" className="form-control" placeholder="Ask a question" aria-label="Recipient's username" aria-describedby="button-addon2" />
+		<div className="input-group-append">
+			<button onClick={() => submitQuestion()} className="btn btn-outline-secondary" type="button" id="button-addon2">Ask!</button>
 		</div>
 	</div>)
 };
 
 class Question extends Component {
-	constructor(props) {
-		super();
-
-		this.state = {
-			questions: [],
-			profiles: props.profiles
-		};
-	}
-
-	// TODO: make this work with API
-	getQuestions() {
-		return questionsApi.get()
-			.then(({ data }) => {
-				const qIds = data.map(q => answersApi.get({ params: { question_id: q.id } }));
-
-				this.setState({ questions: data });
-
-				return Promise.all(qIds);
-			}).then((answers) => {
-				const ans = answers.map(a => a.data).flat();
-				const qs = this.state.questions;
-				this.setState({ questions: qs.map(q => ({ ...q, answers: ans.filter(a => a.question_id === q.id) })) });
-			});
-	}
-
-	componentDidMount() {
-		this.getQuestions();
-	}
+	// constructor(props) {
+	// 	super();
+	// 	console.log(props, '123');
+	// 	this.state = {
+	// 		questions: props.questions,
+	// 		//profiles: props.profiles,
+	// 		currentUser: props.userId
+	// 	};
+	// }
 
 	refreshAnswers = newAnswer => {
 		this.setState({
-			questions: this.state.questions.map(question => question.id === newAnswer.question_id ?
+			questions: this.props.questions.map(question => question.id === newAnswer.question_id ?
 				{ ...question, answers: [...question.answers, newAnswer] } : question)
 		});
 	};
 
-
 	render() {
 		return <React.Fragment>
-			<AddQuestion />
+			<AddQuestion userId={this.props.userId} profiles={this.props.profiles} />
 			<div className="question-wrapper">
-				{this.state.questions.map(question => {
+				{this.props.questions.map(question => {
 					return <QuestionCard
 						key={question.id}
 						id={question.id}
 						answers={question.answers}
 						text={question.text}
-						profiles={this.state.profiles}
+						profiles={this.props.profiles}
 						refreshAnswers={this.refreshAnswers} />;
 
 				})}

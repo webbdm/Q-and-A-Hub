@@ -4,7 +4,7 @@ import {
 	Switch,
 	Route,
 } from "react-router-dom";
-import { profiles } from "./providers/api";
+import { profiles, questionsApi, answersApi } from "./providers/api";
 
 import Community from "./components/community/Community";
 import Header from "./components/Header";
@@ -20,6 +20,7 @@ class App extends Component {
 		isAuthenticated: true,
 		isNewUser: false,
 		profiles: [],
+		questions: [],
 		userId: 1,
 		userProfile: {}
 	}
@@ -35,6 +36,22 @@ class App extends Component {
 		const { data } = await profiles.get({ params: { user_id: this.state.userId } });
 		const [firstUserData = {}] = data;
 		this.setAuthedUserData(firstUserData);
+	}
+
+	// TODO: make this work with API
+	getQuestions() {
+		return questionsApi.get()
+			.then(({ data }) => {
+				const qIds = data.map(q => answersApi.get({ params: { question_id: q.id } }));
+
+				this.setState({ questions: data });
+
+				return Promise.all(qIds);
+			}).then((answers) => {
+				const ans = answers.map(a => a.data).flat();
+				const qs = this.state.questions;
+				this.setState({ questions: qs.map(q => ({ ...q, answers: ans.filter(a => a.question_id === q.id) })) });
+			});
 	}
 
 	handleLogin = () => {
@@ -54,15 +71,17 @@ class App extends Component {
 		});
 	}
 
-	componentDidMount() {
-		Promise.all([
+	async componentDidMount() {
+		await Promise.all([
 			this.getAllProfiles(),
 			this.getAuthedUserData()
 		]);
+
+		await this.getQuestions();
 	}
 
 	render() {
-		const { isAuthenticated } = this.state;
+		const { isAuthenticated, userId, profiles, questions } = this.state;
 
 		return (
 			<Router>
@@ -74,9 +93,9 @@ class App extends Component {
 
 					<div className="container">
 						<Switch>
-							<Route exact path="/">
-								<Question profiles={this.state.profiles} />
-							</Route>
+							{/* <Route exact path="/">
+								<Question question={questions} userId={userId} profiles={profiles} />
+							</Route> */}
 							<Route path="/community">
 								<Community />
 							</Route>
@@ -92,7 +111,7 @@ class App extends Component {
 								isAuthenticated={isAuthenticated}
 								path="/"
 							>
-								<Question />
+								<Question questions={questions} userId={userId} profiles={profiles} />
 							</PrivateRoute>
 
 							<PrivateRoute
