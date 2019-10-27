@@ -8,6 +8,7 @@ import { profiles } from "./providers/api";
 
 import Community from "./components/community/Community";
 import Header from "./components/Header";
+import Login from "./components/Login";
 import Profile from "./components/profile/Profile";
 import Question from "./components/question/Question";
 
@@ -73,6 +74,11 @@ class App extends Component {
 							<Route path="/community">
 								<Community />
 							</Route>
+							<Route
+								path="/login"
+								component={Login}
+							/>
+
 							<Route
 								path="/profile"
 								render={() => <Profile
