@@ -1,11 +1,36 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
+
+import { profiles } from "../../providers/api";
+
+import "./Community.scss";
 
 class Community extends Component {
-	render() {
-		return <Fragment>
-			<div>Community</div>
-		</Fragment>;
-	}
+    constructor() {
+        super();
+
+        this.state = {
+            community: []
+        };
+    }
+
+    async componentDidMount() {
+        const community = await profiles.get();
+        this.setState({ community: community.data });
+    }
+    render() {
+        const { community } = this.state;
+
+        return <div className="community-wrapper card-columns">
+            {community.map(member => <div className="card">
+                <div class="card-body">
+                    <h5 class="card-title">{member.name}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{member.cohort}</h6>
+                    <p class="card-text">{member.bio}</p>
+                </div>
+            </div>
+
+            )}</div>;
+    }
 }
 
 export default Community;

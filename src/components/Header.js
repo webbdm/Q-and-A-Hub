@@ -6,7 +6,7 @@ import "./Header.scss";
 const Header = () => {
   return <header className="App-header">
     <nav className="navbar ">
-      <div href="#" className="navbar-brand">Q and A</div>
+      <div href="#" className="navbar-brand">Mentorship Hub</div>
 
       <div className="nav-links">
         <Link

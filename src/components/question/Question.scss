@@ -16,6 +16,7 @@ $dark: #3D3E4D;
 .card {
   border: none !important;
   background-color: $dark !important;
+  //opacity: 0.8;
   .card-body, .card-header, 
   textarea, .input-group-text {
     border: none !important;
