@@ -8,44 +8,46 @@ import { profiles } from "./providers/api";
 
 import Community from "./components/community/Community";
 import Header from "./components/Header";
+import Login from "./components/Login";
+import PrivateRoute from "./components/global/PrivateRoute";
 import Profile from "./components/profile/Profile";
 import Question from "./components/question/Question";
 
 import "./App.css";
 
 class App extends Component {
-	constructor() {
-		super();
-
-		this.state = {
-			isNewUser: false,
-			profiles: [],
-			userId: 1,
-			userProfile: {}
-		};
-
-		this.getAllProfiles = this.getAllProfiles.bind(this);
-		this.setAuthedUserData = this.setAuthedUserData.bind(this);
+	state = {
+		isAuthenticated: true,
+		isNewUser: false,
+		profiles: [],
+		userId: 1,
+		userProfile: {}
 	}
 
-	getAllProfiles() {
+	getAllProfiles = async () => {
 		// TODO: exclude the auther users profile once the API is active
-		return profiles.get({ params: { user_id_ne: this.state.userId } })
-			.then(({ data }) => {
-				this.setState(state => ({ ...state, profiles: data }));
-			});
+		const { data } = await profiles.get({ params: { user_id_ne: this.state.userId } });
+		this.setState(state => ({ ...state, profiles: data }));
 	}
 
 	// TODO: make this work with API
-	getAuthedUserData() {
-		return profiles.get({ params: { user_id: this.state.userId } })
-			.then(({ data }) => {
-				const [firstUserData = {}] = data;
-				this.setAuthedUserData(firstUserData);
-			});
+	getAuthedUserData = async () => {
+		const { data } = await profiles.get({ params: { user_id: this.state.userId } });
+		const [firstUserData = {}] = data;
+		this.setAuthedUserData(firstUserData);
 	}
 
-	setAuthedUserData(userData) {
+	handleLogin = () => {
+		// TODO: get to work with server / SSO
+		this.setState({ isAuthenticated: true });
+	}
+
+	handleLogout = () => {
+		// TODO: get to work with server / SSO
+		this.setState({ isAuthenticated: false });
+	}
+
+	setAuthedUserData = (userData) => {
 		this.setState({
 			isNewUser: !Object.keys(userData).length,
 			userProfile: userData
@@ -60,28 +62,57 @@ class App extends Component {
 	}
 
 	render() {
+		const { isAuthenticated } = this.state;
+
 		return (
 			<Router>
 				<div className="App">
-					<Header />
+					<Header
+						handleLogout={this.handleLogout}
+						isAuthenticated={isAuthenticated}
+					/>
 
 					<div className="container">
 						<Switch>
 							<Route exact path="/">
-								<Question />
+								<Question profiles={this.state.profiles} />
 							</Route>
 							<Route path="/community">
 								<Community />
 							</Route>
 							<Route
+								path="/login"
+								render={() => <Login
+									handleLogin={this.handleLogin}
+								/>}
+							/>
+
+							<PrivateRoute
+								exact
+								isAuthenticated={isAuthenticated}
+								path="/"
+							>
+								<Question />
+							</PrivateRoute>
+
+							<PrivateRoute
+								isAuthenticated={isAuthenticated}
+								path="/community"
+							>
+								<Community />
+							</PrivateRoute>
+
+							<PrivateRoute
+								isAuthenticated={isAuthenticated}
 								path="/profile"
-								render={() => <Profile
+							>
+								<Profile
 									isNewUser={this.state.isNewUser}
 									profiles={this.state.profiles}
 									setAuthedUserData={this.setAuthedUserData}
 									userProfile={this.state.userProfile}
-								/>}
-							/>
+								/>
+							</PrivateRoute>
 						</Switch>
 					</div>
 				</div>

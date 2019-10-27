@@ -34,6 +34,13 @@
       "question_id": 1,
       "created_by": "3",
       "id": "3Cum_z4"
+    },
+    {
+      "text": "ddsfdsfsdf",
+      "created_at": "11:30am",
+      "question_id": 1,
+      "created_by": "3",
+      "id": "yCYH0Dg"
     }
   ],
   "questions": [
@@ -95,7 +102,8 @@
       "tags": [
         "android"
       ],
-      "id": 4
+      "id": 4,
+      "user_id": "4"
     },
     {
       "bio": "yay",
@@ -105,7 +113,8 @@
         "ajax",
         "angularjs"
       ],
-      "id": 5
+      "id": 5,
+      "user_id": "5"
     },
     {
       "bio": "dffasdfas",
@@ -114,7 +123,8 @@
       "tags": [
         ".net"
       ],
-      "id": 6
+      "id": 6,
+      "user_id": "6"
     }
   ]
 }

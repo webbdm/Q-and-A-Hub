@@ -12,7 +12,7 @@ header {
     font-size: 40px;
     font-weight: 700;
 }
-    
+
 .App-header {
     .navbar {
         .nav-links {
@@ -20,6 +20,9 @@ header {
             flex-direction: row;
             a {
                 color: white;
+            }
+            span:hover {
+                cursor: pointer;
             }
         }
     }
