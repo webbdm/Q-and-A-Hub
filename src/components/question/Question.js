@@ -40,8 +40,9 @@ const QuestionCard = ({ id, text, answers = [], refreshAnswers }) => {
 				<div className="input-group-prepend">
 					<span className="input-group-text">Answer</span>
 				</div>
-				<textarea ref={inputRef} onKeyUp={(e) => handleKeyPress(e)} className="form-control" aria-label="With textarea"></textarea>
-				<button onClick={() => submitAnswer()}>Submit</button>
+				{/* <textarea ref={inputRef} onKeyUp={(e) => handleKeyPress(e)} className="form-control" aria-label="With textarea"></textarea> */}
+				<input ref={inputRef} onKeyUp={(e) => handleKeyPress(e)} className="form-control" aria-label="Username" aria-describedby="addon-wrapping"></input>
+				<button className="addAnswer" onClick={() => submitAnswer()}>Submit</button>
 			</div>
 
 		</div>

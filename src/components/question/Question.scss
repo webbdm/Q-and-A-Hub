@@ -1,4 +1,4 @@
-$dark: #3D3E4D;
+$dark: #3d3e4d;
 
 .question {
   color: white;
@@ -17,10 +17,32 @@ $dark: #3D3E4D;
   border: none !important;
   background-color: $dark !important;
   //opacity: 0.8;
-  .card-body, .card-header, 
-  textarea, .input-group-text {
+  .card-body,
+  .card-header,
+  input,
+  .input-group-text {
     border: none !important;
     background-color: $dark;
+  }
+  .addAnswer {
+    margin-right: 5px;
+    border: none !important;
+    background-color: $dark;
+    &:hover{
+      font-weight: bold;
+    }
+  }
+  input {
+    color: white !important;
+    resize: none;
+    border: none !important;
+    outline: none !important;
+    &:focus{
+      background-color: $dark;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none;
+    }
   }
 }
 

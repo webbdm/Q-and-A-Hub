@@ -22,10 +22,10 @@ class Community extends Component {
 
         return <div className="community-wrapper card-columns">
             {community.map(member => <div className="card">
-                <div class="card-body">
-                    <h5 class="card-title">{member.name}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{member.cohort}</h6>
-                    <p class="card-text">{member.bio}</p>
+                <div className="card-body">
+                    <h5 className="card-title">{member.name}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">{member.cohort}</h6>
+                    <p className="card-text">{member.bio}</p>
                 </div>
             </div>
 
