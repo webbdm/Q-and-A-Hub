@@ -1,8 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import ProfileForm from "./ProfileForm";
 
 class Profile extends Component {
 	render() {
-		return <div>Profile</div>;
+		return <Fragment>
+			<ProfileForm
+				isNewUser={this.props.isNewUser}
+				userProfile={this.props.userProfile}
+			/>
+
+			<hr className="w-75" />
+		</Fragment>;
 	}
 }
 
