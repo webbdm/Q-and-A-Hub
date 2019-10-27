@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./Header.scss";
 
 const Header = () => {
-  return <header className="App-header">
+  return <header className="App-header pl-4">
     <nav className="navbar ">
       <div href="#" className="navbar-brand">Mentorship Hub</div>
 
