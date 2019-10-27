@@ -12,12 +12,12 @@ const ProfileCard = ({
 }) => (
 	<div className="profile-card ml-4 mb-5 py-1">
 		<div className="d-flex align-items-end mb-4">
-			<h4 className="m-0 mr-2 text-light">{name}</h4>
+			<h4 className="m-0 mr-2">{name}</h4>
 
-			<small className="text-muted">{cohort}</small>
+			<small>{cohort}</small>
 		</div>
 
-		<p className="m-0 mb-4 text-light">{bio}</p>
+		<p className="m-0 mb-4">{bio}</p>
 
 		<div className="d-flex flex-wrap">
 			{tags.map(tag => <Tag

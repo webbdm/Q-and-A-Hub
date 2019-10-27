@@ -38,17 +38,20 @@ class ProfileForm extends Component {
 		}));
 	}
 
-	handleOnSubmit = () => {
+	handleOnSubmit = async () => {
 		const { profileData } = this.state;
 		this.setState({ isLoading: true });
 
 		const methodVerb = this.props.isNewUser ? "post" : "put";
 
-		profiles[methodVerb](profileData)
-			.then(() => {
-				this.setState({ isLoading: false });
-				this.props.setAuthedUserData(profileData);
-			});
+		try {
+			await profiles[methodVerb](profileData);
+			this.props.setAuthedUserData(profileData);
+		} catch (error) {
+			console.error(error);
+		}
+
+		this.setState({ isLoading: false });
 	}
 
 	handleResetForm = () => {

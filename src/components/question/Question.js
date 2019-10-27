@@ -5,7 +5,7 @@ import { questionsApi, answersApi } from "../../providers/api";
 import "./Question.scss";
 
 const Answer = ({ answerer, text, profiles = [] }) => {
-	const user = profiles.find(profile => profile.id = answerer);
+	const user = profiles.find(profile => profile.id === answerer);
 	return (<span className="answer"><p>{text}</p><p className="user-name">{user && user.name}</p></span>);
 };
 
@@ -37,7 +37,7 @@ const QuestionCard = ({ id, text, answers = [], refreshAnswers, profiles }) => {
 			</div>
 			<p style={{ "padding": "0 20px", "margin": 0, "color": "white" }}>{answers.length} answers</p>
 			<div className="card-body">
-				{answers && answers.length ? answers.map(answer => <Answer profiles={profiles} answerer={answer.created_by} key={answer.id} text={answer.text} />)
+				{answers && answers.length ? answers.map(answer => <Answer profiles={profiles} answerer={answer.createdBy} key={answer.id} text={answer.text} />)
 					: <p>No answers yet. Be the first!</p>}
 			</div>
 			<div className="input-group">

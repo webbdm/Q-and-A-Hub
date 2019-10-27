@@ -2,6 +2,7 @@ import { sortBy } from "lodash";
 
 const tags = [
 	{ value: "javascript", label: "JavaScript"},
+	{ value: "elixir", label: "Elixir"},
 	{ value: "java", label: "Java"},
 	{ value: "c#", label: "C#"},
 	{ value: "php", label: "PHP"},

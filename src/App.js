@@ -51,7 +51,7 @@ class App extends Component {
 			}).then((answers) => {
 				const ans = answers.map(a => a.data).flat();
 				const qs = this.state.questions;
-				this.setState({ questions: qs.map(q => ({ ...q, answers: ans.filter(a => a.question_id === q.id) })) });
+				this.setState({ questions: qs.map(q => ({ ...q, answers: ans.filter(a => a.questionId === q.id) })) });
 			});
 	}
 
