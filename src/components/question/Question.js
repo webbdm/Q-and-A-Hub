@@ -73,7 +73,6 @@ const AddQuestion = ({ userId, profiles, refreshQuestions }) => {
 		};
 		questionsApi.post(obj);
 		inputRef.current.value = null;
-		console.log(obj);
 		refreshQuestions(obj);
 	};
 

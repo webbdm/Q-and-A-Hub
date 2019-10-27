@@ -1,7 +1,8 @@
 import axios from "axios";
 
 // const baseURL = "http://localhost:4000";
-const baseURL = "https://cd8e52e4.ngrok.io/api";
+//const baseURL = "https://cd8e52e4.ngrok.io/api";
+const baseURL = "http://localhost:4000/api";
 
 // export const api = {
 //     get: url => axios.get(`${baseURL}` + `${url}`),
