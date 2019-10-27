@@ -4,7 +4,7 @@ import "./Tag.scss";
 
 const Tag = ({onClick, tag}) => {
 	return (
-		<div className="tag grow px-2 py-1 rounded" onClick={onClick}>
+		<div className="tag grow px-2 py-1 rounded m-1" onClick={onClick}>
 			{tag}
 		</div>
 	);

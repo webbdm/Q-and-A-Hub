@@ -8,6 +8,11 @@ header {
     font-weight: 600;
 }
 
+.nav-link:hover {
+    opacity: .5;
+    transition: opacity .15s ease-in;
+}
+
 .navbar-brand {
     font-size: 40px;
     font-weight: 700;
