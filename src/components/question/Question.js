@@ -6,8 +6,9 @@ import "./Question.scss";
 
 const Answer = ({ answerer, text, profiles = [] }) => {
 	const user = profiles.find(profile => profile.id = answerer);
-return (<span className="answer"><p>{text}</p><p className="user-name">{user && user.name}</p></span>)
+	return (<span className="answer"><p>{text}</p><p className="user-name">{user && user.name}</p></span>)
 };
+
 
 const QuestionCard = ({ id, text, answers = [], refreshAnswers, profiles = [] }) => {
 	const [newAnswer, setNewAnswer] = useState("");
@@ -52,6 +53,15 @@ const QuestionCard = ({ id, text, answers = [], refreshAnswers, profiles = [] })
 	</div>);
 };
 
+const AddQuestion = () => {
+	return (<div style={{'padding': '0 10%'}}class="input-group mb-3">
+		<input type="text" class="form-control" placeholder="Ask a question" aria-label="Recipient's username" aria-describedby="button-addon2" />
+		<div class="input-group-append">
+			<button class="btn btn-outline-secondary" type="button" id="button-addon2">Ask!</button>
+		</div>
+	</div>)
+};
+
 class Question extends Component {
 	constructor(props) {
 		super();
@@ -91,19 +101,21 @@ class Question extends Component {
 
 
 	render() {
-		console.log(this.state.profiles);
-		return <div className="question-wrapper">
-			{this.state.questions.map(question => {
-				return <QuestionCard
-					key={question.id}
-					id={question.id}
-					answers={question.answers}
-					text={question.text}
-					profiles={this.state.profiles}
-					refreshAnswers={this.refreshAnswers} />;
+		return <React.Fragment>
+			<AddQuestion />
+			<div className="question-wrapper">
+				{this.state.questions.map(question => {
+					return <QuestionCard
+						key={question.id}
+						id={question.id}
+						answers={question.answers}
+						text={question.text}
+						profiles={this.state.profiles}
+						refreshAnswers={this.refreshAnswers} />;
 
-			})}
-		</div>;
+				})}
+			</div>
+		</React.Fragment>;
 	}
 }
 
